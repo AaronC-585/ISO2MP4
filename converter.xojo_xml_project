@@ -7,7 +7,7 @@
  <MinorVersion>0</MinorVersion>
  <SubVersion>0</SubVersion>
  <Release>0</Release>
- <NonRelease>13</NonRelease>
+ <NonRelease>17</NonRelease>
  <Region></Region>
  <ShortVersion></ShortVersion>
  <LongVersion></LongVersion>
@@ -249,6 +249,36 @@
    <SourceLine>End Sub</SourceLine>
   </ItemSource>
  </HookInstance>
+ <Method>
+  <ItemName>LeadingZeros</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <PartID>414877695</PartID>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function LeadingZeros(value As UInt16) As String</SourceLine>
+   <SourceLine>Dim strValue As String = value.ToString</SourceLine>
+   <SourceLine>Select Case strValue.Length</SourceLine>
+   <SourceLine>Case 1</SourceLine>
+   <SourceLine>Return "0000" + strValue</SourceLine>
+   <SourceLine>Case 2</SourceLine>
+   <SourceLine>Return "000" + strValue</SourceLine>
+   <SourceLine>Case 3</SourceLine>
+   <SourceLine>Return "00" + strValue</SourceLine>
+   <SourceLine>Case 4</SourceLine>
+   <SourceLine>Return "0" + strValue</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>Return strValue // For values that are 5 digits or more (UInt16 max is 65535)</SourceLine>
+   <SourceLine>End Select</SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams>value As UInt16</ItemParams>
+  <ItemResult>String</ItemResult>
+ </Method>
  <Property>
   <ItemName>g</ItemName>
   <Compatibility></Compatibility>
@@ -803,7 +833,8 @@
     <SourceLine>Exit</SourceLine>
     <SourceLine>End If</SourceLine>
     <SourceLine></SourceLine>
-    <SourceLine>Dim c,c2 As Int32</SourceLine>
+    <SourceLine>Dim c,c2 As UInt16</SourceLine>
+    <SourceLine>Dim f,f2 As String</SourceLine>
     <SourceLine>Var sh As New Shell</SourceLine>
     <SourceLine>sh.mode = 1</SourceLine>
     <SourceLine>Var dexter As folderitem</SourceLine>
@@ -812,7 +843,8 @@
     <SourceLine>If Not zout.Exists Then zout.CreateFolder</SourceLine>
     <SourceLine>Do</SourceLine>
     <SourceLine>c2 = titlelist.SelectedRowIndex + 1</SourceLine>
-    <SourceLine>dexter = zOut.Child("T" + c2.ToString + "C" + Str(c+1) + ".mp4")</SourceLine>
+    <SourceLine></SourceLine>
+    <SourceLine>dexter = zOut.Child("T" + LeadingZeros(c2) + "C" + LeadingZeros(c+1) + ".mp4")</SourceLine>
     <SourceLine>cmd1 = """" +dEXE.NativePath + """ -t " + c2.ToString + " -c """ + Str(c+1) + """ -i """ + zin.NativePath + """ -o """ + dexter.NativePath + """  -f ""av_mp4"""</SourceLine>
     <SourceLine>sh.TimeOut = 30000</SourceLine>
     <SourceLine>sh.Execute(cmd1)</SourceLine>
@@ -1355,7 +1387,7 @@
   <ItemData>0</ItemData>
  </WarningPreferences>
  <StudioWindowState>
-  <EditBounds><Rect left="131" top="16" width="1012" height="732"/></EditBounds>
+  <EditBounds><Rect left="57" top="38" width="1012" height="720"/></EditBounds>
   <WindowMaximized>0</WindowMaximized>
   <Editors>
    <EditorCount>1</EditorCount>

@@ -1,0 +1,1 @@
+Taskklill.exe /IM HandBrakeCLI.exe
